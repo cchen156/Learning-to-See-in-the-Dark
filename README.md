@@ -35,11 +35,15 @@ python download_models.py
 3. Run "python test_Sony.py". This will generate results on the Sony test set.
 4. Run "python test_Fuji.py". This will generate results on the Fuji test set.
 
+By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code. 
+
 ### Training
 1. To train the Sony model, run "python train_Sony.py".
 2. To train the Fuji model, run "python train_Fuji.py".
 
-Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the training data into memory. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. We will provide RAM friendly code and processed images soon.
+By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code.
+
+The training and testing code has been cleaned to be as simple as possible. Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the training data into memory. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. We will provide RAM friendly code and processed images soon.
 
 ## Questions
 If you have questions about the code and data, please email to cchen156@illinois.edu.
