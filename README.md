@@ -10,7 +10,7 @@ This is a Tensorflow implementation of Learning to See in the Dark.
 ## Setup
 
 ### Requirement
-Required python libraries: Tensorflow (>=1.1) + Scipy + Numpy + Rawpy.
+Required python (version 2.7) libraries: Tensorflow (>=1.1) + Scipy + Numpy + Rawpy.
 
 Tested in Ubuntu + Intel i7 CPU + Nvidia Titan X (Pascal) with Cuda (>=8.0) and CuDNN (>=5.0). CPU mode should also work with minor changes but not tested.
 
