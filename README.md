@@ -22,7 +22,7 @@ We provide the dataset by Sony and Fuji cameras. To download the data, you can r
 ```Shell
 python download_dataset.py
 ```
-or you can download it directly from Google drive for the [Sony](https://drive.google.com/open?id=1G6VruemZtpOyHjOC5N8Ww3ftVXOydSXx)(25GB)  and [Fuji](https://drive.google.com/open?id=1C7GeZ3Y23k1B8reRL79SqnZbRBc4uizH) (52GB) sets. 
+or you can download it directly from Google drive for the [Sony](https://drive.google.com/open?id=1G6VruemZtpOyHjOC5N8Ww3ftVXOydSXx)(25 GB)  and [Fuji](https://drive.google.com/open?id=1C7GeZ3Y23k1B8reRL79SqnZbRBc4uizH) (52 GB) sets. 
 
 The file lists are provided. In each row, there are a short-exposed image path, the corresponding long-exposed image path, camera ISO and F number. Note that multiple short-exposed images may correspond to the same long-exposed image. 
 
@@ -46,7 +46,7 @@ By default, the code takes the data in the "./dataset/Sony/" folder and "./datas
 
 By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code.
 
-Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the training data into memory. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. We will provide RAM friendly code and processed images soon.
+Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. We will provide RAM friendly code and processed images soon.
 
 ## Questions
 If you have questions about the code and data, please email to cchen156@illinois.edu.
