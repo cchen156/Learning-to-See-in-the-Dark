@@ -1,12 +1,13 @@
 # Learning-to-See-in-the-Dark
 [Project Website](http://web.engr.illinois.edu/~cchen156/SID.html)<br/>
-This is a Tensorflow implementation of Learning to See in the Dark. 
+This is a Tensorflow implementation of Learning to See in the Dark, in CVPR 2018.  
 
 ![teaser](images/fig1.png "Sample inpainting results on held-out images")
 
 ## Demo Video
+https://youtu.be/3PcxO-mvzPs
 
-
+<iframe width="480" height="270" src="https://www.youtube.com/embed/3PcxO-mvzPs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 ## Setup
 
 ### Requirement
