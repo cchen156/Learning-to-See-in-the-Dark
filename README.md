@@ -1,10 +1,11 @@
 # Learning-to-See-in-the-Dark
 [Project Website](http://web.engr.illinois.edu/~cchen156/SID.html)<br/>
+[Paper](http://cchen156.web.engr.illinois.edu/paper/18CVPR_SID.pdf)<br/>
 This is a Tensorflow implementation of Learning to See in the Dark in CVPR 2018, by [Chen Chen](http://cchen156.web.engr.illinois.edu/), [Qifeng Chen](http://cqf.io/), [Jia Xu](http://pages.cs.wisc.edu/~jiaxu/), and [Vladlen Koltun](http://vladlen.info/).  
 
 ![teaser](images/fig1.png "Sample inpainting results on held-out images")
 
-This code includes the default model for training and testing on the See-in-the-Dark (SID) dataset. The code has been cleaned to be as simple as possible.
+This code includes the default model for training and testing on the See-in-the-Dark (SID) dataset. 
 
 
 ## Demo Video
@@ -46,7 +47,7 @@ By default, the code takes the data in the "./dataset/Sony/" folder and "./datas
 
 By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code.
 
-Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. If you need to train it on a machine with less RAM, you need to revise the code and use the groundtruth data on the disk. We will provide the 16-bit groundtruth images soon. 
+Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. If you need to train it on a machine with less RAM, you may need to revise the code and use the groundtruth data on the disk. We provide the 16-bit groundtruth images processed by Rawpy: [Sony](https://drive.google.com/file/d/1XMZ61mUh7xvi9rBwZvPS8llOR8hvANst/view?usp=sharing) (12 GB)  and [Fuji](https://drive.google.com/file/d/1-Z5fgn3pmw_66l6mt6P4AZTuRyh5DvXS/view?usp=sharing) (22 GB). 
 
 ## Questions
 If you have questions about the code and data, please email to cchen156@illinois.edu.
