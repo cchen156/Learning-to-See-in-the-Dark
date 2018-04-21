@@ -46,7 +46,7 @@ By default, the code takes the data in the "./dataset/Sony/" folder and "./datas
 
 By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code.
 
-Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. We will provide RAM friendly code and processed images soon.
+Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64GB RAM for training the Sony model and 128GB RAM for the Fuji model. If you need to train it on a machine with less RAM, you need to revise the code and use the groundtruth data on the disk. We will provide the 16-bit groundtruth images soon. 
 
 ## Questions
 If you have questions about the code and data, please email to cchen156@illinois.edu.
