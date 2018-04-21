@@ -40,9 +40,9 @@ python download_models.py
 
 By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code. 
 
-### Training
-1. To train the Sony model, run "python train_Sony.py".
-2. To train the Fuji model, run "python train_Fuji.py".
+### Training new models
+1. To train the Sony model, run "python train_Sony.py". The result and model will be save in "result_Sony" folder by default. 
+2. To train the Fuji model, run "python train_Fuji.py". The result and model will be save in "result_Fuji" folder by default. 
 
 By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code.
 

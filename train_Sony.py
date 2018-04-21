@@ -13,7 +13,7 @@ import glob
 
 input_dir = './dataset/Sony/short/'
 gt_dir = './dataset/Sony/long/'
-checkpoint_dir = './checkpoint/Sony/'
+checkpoint_dir = './result_Sony/'
 result_dir = './result_Sony/'
 
 #get train and test IDs

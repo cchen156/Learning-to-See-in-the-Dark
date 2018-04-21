@@ -9,7 +9,7 @@ import glob
 
 input_dir = './dataset/Fuji/short/'
 gt_dir = './dataset/Fuji/long/'
-checkpoint_dir = './checkpoint/Fuji/'
+checkpoint_dir = './result_Fuji/'
 result_dir = './result_Fuji/'
 
 #get train and test IDs
