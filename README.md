@@ -25,7 +25,7 @@ We provide the dataset by Sony and Fuji cameras. To download the data, you can r
 ```Shell
 python download_dataset.py
 ```
-or you can download it directly from Google drive for the [Sony](https://drive.google.com/open?id=1G6VruemZtpOyHjOC5N8Ww3ftVXOydSXx) (25 GB)  and [Fuji](https://drive.google.com/open?id=1C7GeZ3Y23k1B8reRL79SqnZbRBc4uizH) (52 GB) sets. 
+or you can download it directly from Google drive for the [Sony](https://drive.google.com/file/d/10kpAcvldtcb9G2ze5hTcF1odzu4V_Zvh/view?usp=sharing) (25 GB)  and [Fuji](https://drive.google.com/file/d/12hvKCjwuilKTZPe9EZ7ZTb-azOmUA3HT/view?usp=sharing) (52 GB) sets. 
 
 The file lists are provided. In each row, there are a short-exposed image path, the corresponding long-exposed image path, camera ISO and F number. Note that multiple short-exposed images may correspond to the same long-exposed image. 
 
@@ -49,7 +49,7 @@ By default, the code takes the data in the "./dataset/Sony/" folder and "./datas
 
 By default, the code takes the data in the "./dataset/Sony/" folder and "./dataset/Fuji/". If you save the dataset in other folders, please change the "input_dir" and "gt_dir" at the beginning of the code.
 
-Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64 GB RAM for training the Sony model and 128 GB RAM for the Fuji model. If you need to train it on a machine with less RAM, you may need to revise the code and use the groundtruth data on the disk. We provide the 16-bit groundtruth images processed by Rawpy: [Sony](https://drive.google.com/file/d/1XMZ61mUh7xvi9rBwZvPS8llOR8hvANst/view?usp=sharing) (12 GB)  and [Fuji](https://drive.google.com/file/d/1-Z5fgn3pmw_66l6mt6P4AZTuRyh5DvXS/view?usp=sharing) (22 GB). 
+Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64 GB RAM for training the Sony model and 128 GB RAM for the Fuji model. If you need to train it on a machine with less RAM, you may need to revise the code and use the groundtruth data on the disk. We provide the 16-bit groundtruth images processed by Rawpy: [Sony](https://drive.google.com/file/d/1wfkWVkauAsGvXtDJWX0IFDuDl5ozz2PM/view?usp=sharing) (12 GB)  and [Fuji](https://drive.google.com/file/d/1nJM0xYVnzmOZNacBRKebiXA4mBmiTjte/view?usp=sharing) (22 GB). 
 
 ## Questions
 If you have questions about the code and data, please email to cchen156@illinois.edu.
