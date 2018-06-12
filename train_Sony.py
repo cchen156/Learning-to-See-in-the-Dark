@@ -124,7 +124,7 @@ G_loss=tf.reduce_mean(tf.abs(out_image - gt_image))
 
 t_vars=tf.trainable_variables()
 lr=tf.placeholder(tf.float32)
-G_opt=tf.train.AdamOptimizer(learning_rate=lr).minimize(G_loss,var_list=[var for var in t_vars if var.name.startswith('g_')])
+G_opt=tf.train.AdamOptimizer(learning_rate=lr).minimize(G_loss)
 
 saver=tf.train.Saver()
 sess.run(tf.global_variables_initializer())
