@@ -13,10 +13,7 @@ result_dir = './result_Fuji/'
 
 # get train IDs
 train_fns = glob.glob(gt_dir + '0*.RAF')
-train_ids = []
-for i in range(len(train_fns)):
-    _, train_fn = os.path.split(train_fns[i])
-    train_ids.append(int(train_fn[0:5]))
+train_ids = [int(os.path.basename(train_fn)[0:5]) for train_fn in train_fns]
 
 ps = 512  # patch size for training
 save_freq = 500
@@ -171,11 +168,11 @@ for epoch in range(lastepoch, 4001):
         train_id = train_ids[ind]
         in_files = glob.glob(input_dir + '%05d_00*.RAF' % train_id)
         in_path = in_files[np.random.random_integers(0, len(in_files) - 1)]
-        _, in_fn = os.path.split(in_path)
+        in_fn = os.path.basename(in_path)
 
         gt_files = glob.glob(gt_dir + '%05d_00*.RAF' % train_id)
         gt_path = gt_files[0]
-        _, gt_fn = os.path.split(gt_path)
+        gt_fn = os.path.basename(gt_path)
         in_exposure = float(in_fn[9:-5])
         gt_exposure = float(gt_fn[9:-5])
         ratio = min(gt_exposure / in_exposure, 300)

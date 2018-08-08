@@ -13,10 +13,7 @@ result_dir = './result_Fuji/'
 
 # get test IDs
 test_fns = glob.glob(gt_dir + '1*.RAF')
-test_ids = []
-for i in range(len(test_fns)):
-    _, test_fn = os.path.split(test_fns[i])
-    test_ids.append(int(test_fn[0:5]))
+test_ids = [int(os.path.basename(test_fn)[0:5]) for test_fn in test_fns]
 
 
 def lrelu(x):
@@ -143,11 +140,11 @@ for test_id in test_ids:
     in_files = glob.glob(input_dir + '%05d_00*.RAF' % test_id)
     for k in range(len(in_files)):
         in_path = in_files[k]
-        _, in_fn = os.path.split(in_path)
+        in_fn = os.path.basename(in_path)
         print(in_fn)
         gt_files = glob.glob(gt_dir + '%05d_00*.RAF' % test_id)
         gt_path = gt_files[0]
-        _, gt_fn = os.path.split(gt_path)
+        gt_fn = os.path.basename(gt_path)
         in_exposure = float(in_fn[9:-5])
         gt_exposure = float(gt_fn[9:-5])
         ratio = min(gt_exposure / in_exposure, 300)
