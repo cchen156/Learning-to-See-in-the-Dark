@@ -21,6 +21,10 @@ Required python (version 2.7) libraries: Tensorflow (>=1.1) + Scipy + Numpy + Ra
 Tested in Ubuntu + Intel i7 CPU + Nvidia Titan X (Pascal) with Cuda (>=8.0) and CuDNN (>=5.0). CPU mode should also work with minor changes but not tested.
 
 ### Dataset
+
+### Update Aug, 2018: 
+we found some misalignment with the ground-truth for image 10034, 10045, 10172. Please remove those images for quantitative results, but they still can be used for qualitative evaluations.
+
 We provide the dataset by Sony and Fuji cameras. To download the data, you can run
 ```Shell
 python download_dataset.py
