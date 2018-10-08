@@ -177,8 +177,8 @@ for epoch in range(lastepoch, 4001):
             input_patch = np.flip(input_patch, axis=1)
             gt_patch = np.flip(gt_patch, axis=1)
         if np.random.randint(2, size=1)[0] == 1:
-            input_patch = np.flip(input_patch, axis=0)
-            gt_patch = np.flip(gt_patch, axis=0)
+            input_patch = np.flip(input_patch, axis=2)
+            gt_patch = np.flip(gt_patch, axis=2)
         if np.random.randint(2, size=1)[0] == 1:  # random transpose
             input_patch = np.transpose(input_patch, (0, 2, 1, 3))
             gt_patch = np.transpose(gt_patch, (0, 2, 1, 3))
