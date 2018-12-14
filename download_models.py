@@ -31,11 +31,11 @@ def save_response_content(response, destination):
 
 
 
-print('Dowloading Sony Model (84Mb)')
+print('Dowloading Sony Model (84MB)')
 download_file_from_google_drive('1wmx7AM6XWHjHIvpErmIouQgbQoMxAymG', 'checkpoint/Sony/model.ckpt.data-00000-of-00001')
 download_file_from_google_drive('1OmrGMng1QuwUa8lf-_wBVvbRJwBr0ETr', 'checkpoint/Sony/model.ckpt.meta')
 
-print('Dowloading Fuji Model (84Mb)')
+print('Dowloading Fuji Model (84MB)')
 download_file_from_google_drive('1PX5wA89d-JLmwQHqpBnyTYJxDVzC1gpt', 'checkpoint/Fuji/model.ckpt.data-00000-of-00001')
 download_file_from_google_drive('1VzyzQ9JglcxxqUe8yn3-cAeB1pJ4jxf4', 'checkpoint/Fuji/model.ckpt.meta')
 
