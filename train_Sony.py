@@ -126,14 +126,14 @@ input_images['100'] = [None] * len(train_ids)
 
 g_loss = np.zeros((5000, 1))
 
-allfolders = glob.glob('./result/*0')
+allfolders = glob.glob(result_dir + '*0')
 lastepoch = 0
 for folder in allfolders:
     lastepoch = np.maximum(lastepoch, int(folder[-4:]))
 
 learning_rate = 1e-4
 for epoch in range(lastepoch, 4001):
-    if os.path.isdir("result/%04d" % epoch):
+    if os.path.isdir(result_dir + '%04d' % epoch):
         continue
     cnt = 0
     if epoch > 2000:
