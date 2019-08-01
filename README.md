@@ -2,7 +2,7 @@
 
 This is a Tensorflow implementation of Learning to See in the Dark in CVPR 2018, by [Chen Chen](http://cchen156.web.engr.illinois.edu/), [Qifeng Chen](http://cqf.io/), [Jia Xu](http://pages.cs.wisc.edu/~jiaxu/), and [Vladlen Koltun](http://vladlen.info/).  
 
-[Project Website](http://web.engr.illinois.edu/~cchen156/SID.html)<br/>
+[Project Website](http://cchen156.web.engr.illinois.edu/SID.html)<br/>
 [Paper](http://cchen156.web.engr.illinois.edu/paper/18CVPR_SID.pdf)<br/>
 
 ![teaser](images/fig1.png "Sample inpainting results on held-out images")
