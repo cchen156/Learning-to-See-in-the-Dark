@@ -81,6 +81,10 @@ This is a research project and a prototype to prove a concept.
 
 Generally, you just need to subtract the right black level and pack the data in the same way of Sony/Fuji data. If using rawpy, you need to read the black level instead of using 512 in the provided code. The data range may also differ if it is not 14 bits. You need to normalize it to [0,1] for the network input. 
 
+4. Why the results are all black/
+
+It is often because the pre-trained model not downloaded properly. After downloading, you should get 4 checkpoint related files for the model. 
+
 
 ## Questions
 If you have addtional questions after reading the FAQ, please email to cchen156@illinois.edu.
