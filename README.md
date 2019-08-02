@@ -70,12 +70,15 @@ MIT License.
 
 ## FAQ
 1. Can I test my own data using the provided model? 
+
 The proposed method is designed for sensor raw data. The pretrained model probably not work for data from another camera sensor. We do not have support for other camera data. It also does not work for images after camera ISP, i.e., the JPG or PNG data.
 
 2. Will this be in any product?
+
 This is a research project and a prototype to prove a concept. 
 
 3. How can I train the model using my own raw data? 
+
 Generally, you just need to subtract the right black level and pack the data in the same way of Sony/Fuji data. If using rawpy, you need to read the black level instead of using 512 in the provided code. The data range may also differ if it is not 14 bits. You need to normalize it to [0,1] for the network input. 
 
 
