@@ -28,7 +28,7 @@ We provide the dataset by Sony and Fuji cameras. To download the data, you can r
 ```Shell
 python download_dataset.py
 ```
-or you can download it directly from Google drive for the [Sony](https://drive.google.com/file/d/10kpAcvldtcb9G2ze5hTcF1odzu4V_Zvh/view?usp=sharing) (25 GB)  and [Fuji](https://drive.google.com/file/d/12hvKCjwuilKTZPe9EZ7ZTb-azOmUA3HT/view?usp=sharing) (52 GB) sets. 
+or you can download it directly from Google drive for the [Sony](https://storage.googleapis.com/isl-datasets/SID/Sony.zip) (25 GB)  and [Fuji](https://storage.googleapis.com/isl-datasets/SID/Fuji.zip) (52 GB) sets. 
 
 There is download limit by Google drive in a fixed period of time. If you cannot download because of this, try these links: [Sony](https://drive.google.com/open?id=1G6VruemZtpOyHjOC5N8Ww3ftVXOydSXx) (25 GB)  and [Fuji](https://drive.google.com/open?id=1C7GeZ3Y23k1B8reRL79SqnZbRBc4uizH) (52 GB).
 
