@@ -59,8 +59,6 @@ By default, the code takes the data in the "./dataset/Sony/" folder and "./datas
 
 Loading the raw data and proccesing by Rawpy takes significant more time than the backpropagation. By default, the code will load all the groundtruth data processed by Rawpy into memory without 8-bit or 16-bit quantization. This requires at least 64 GB RAM for training the Sony model and 128 GB RAM for the Fuji model. If you need to train it on a machine with less RAM, you may need to revise the code and use the groundtruth data on the disk. We provide the 16-bit groundtruth images processed by Rawpy: [Sony](https://drive.google.com/file/d/1wfkWVkauAsGvXtDJWX0IFDuDl5ozz2PM/view?usp=sharing) (12 GB)  and [Fuji](https://drive.google.com/file/d/1nJM0xYVnzmOZNacBRKebiXA4mBmiTjte/view?usp=sharing) (22 GB). 
 
-## Questions
-If you have questions about the code and data, please email to cchen156@illinois.edu.
 
 ## Citation
 If you use our code and dataset for research, please cite our paper:
@@ -69,3 +67,18 @@ Chen Chen, Qifeng Chen, Jia Xu, and Vladlen Koltun, "Learning to See in the Dark
 
 ### License
 MIT License.
+
+## FAQ
+1. Can I test my own data using the provided model? 
+The proposed method is designed for sensor raw data. The pretrained model probably not work for data from another camera sensor. We do not have support for other camera data. It also does not work for images after camera ISP, i.e., the JPG or PNG data.
+
+2. Will this be in any product?
+This is a research project and a prototype to prove a concept. 
+
+3. How can I train the model using my own raw data? 
+Generally, you just need to subtract the right black level and pack the data in the same way of Sony/Fuji data. If using rawpy, you need to read the black level instead of using 512 in the provided code. The data range may also differ if it is not 14 bits. You need to normalize it to [0,1] for the network input. 
+
+
+## Questions
+If you have addtional questions after reading the FAQ, please email to cchen156@illinois.edu.
+
