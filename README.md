@@ -87,5 +87,5 @@ It is often because the pre-trained model not downloaded properly. After downloa
 
 
 ## Questions
-If you have addtional questions after reading the FAQ, please email to cchen156@illinois.edu.
+If you have additional questions after reading the FAQ, please email to cchen156@illinois.edu.
 
