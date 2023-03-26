@@ -22,7 +22,7 @@ ps = 512  # patch size for training
 save_freq = 500 
 
 # Debug mode that only uses 5 images from the dataset
-DEBUG = 0
+DEBUG = 1
 if DEBUG == 1:
     save_freq = 2
     train_ids = train_ids[0:5]
@@ -193,7 +193,7 @@ learning_rate = 1e-4 # Set the learning rate
 G_opt = torch.optim.Adam(unet.parameters(), lr=learning_rate) # Set the optimizer
 
 # Training loop
-for epoch in range(lastepoch, 4001):
+for epoch in range(lastepoch, 30):
     # Check if the folder exists and skip the epoch if it does
     if os.path.isdir(result_dir + '%04d' % epoch):
         continue
@@ -253,28 +253,28 @@ for epoch in range(lastepoch, 4001):
             gt_patch = np.transpose(gt_patch, (0, 2, 1, 3))
 
         input_patch = np.minimum(input_patch, 1.0) # Input patch should be between 0 and 1
-        input_patch = torch.from_numpy(input_patch) # Convert the input patch to a tensor
-        input_patch = input_patch.permute(0, 3, 1, 2) # Permute the tensor
-        input_patch = input_patch.to(device) # Assign the tensor to the GPU or CPU
+        input_img = torch.from_numpy(input_patch) # Convert the input patch to a tensor
+        input_img = input_img.permute(0, 3, 1, 2) # Permute the tensor
+        input_img = input_img.to(device) # Assign the tensor to the GPU or CPU
 
         gt_patch = np.minimum(gt_patch, 1.0) # Ground truth patch should be between 0 and 1
-        gt_patch = torch.from_numpy(gt_patch) # Convert the ground truth patch to a tensor
-        gt_patch = gt_patch.permute(0, 3, 1, 2) # Permute the tensor
-        gt_patch = gt_patch.to(device) # Assign the tensor to the GPU or CPU
+        gt_img = torch.from_numpy(gt_patch) # Convert the ground truth patch to a tensor
+        gt_img = gt_img.permute(0, 3, 1, 2) # Permute the tensor
+        gt_img = gt_img.to(device) # Assign the tensor to the GPU or CPU
 
         # Run the model
         G_opt.zero_grad() # Set the gradient to 0
-        out_image = unet(input_patch) # Get the output image
+        out_image = unet(input_img) # Get the output image
 
         # Calculate the loss
-        loss = loss_function(out_image, gt_patch)
+        loss = loss_function(out_image, gt_img)
         loss.backward() # Calculate the gradients
         G_opt.step() # Update the weights
         g_loss[ind] = loss.item() # Store the loss
 
         print("%d %d Loss=%.3f Time=%.3f" % (epoch, cnt, np.mean(g_loss[np.where(g_loss)]), time.time() - st)) # Print the loss and time
 
-        output = out_image.permute(0, 2, 3, 1).cpu().data. numpy()# Get the output image and convert it to numpy
+        output = out_image.permute(0, 2, 3, 1).cpu().data.numpy()   # Get the output image and convert it to numpy
         output = np.minimum(np.maximum(output, 0), 1) # Output should be between 0 and 1
 
         # Save the results
