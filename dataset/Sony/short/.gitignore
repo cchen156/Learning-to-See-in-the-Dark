@@ -1,0 +1,5 @@
+
+*.ARW
+*.pyc
+*.jpg
+result_Sony/model.pth
