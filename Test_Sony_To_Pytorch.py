@@ -10,7 +10,7 @@ import torch.nn as nn
 input_dir = './dataset/Sony/short/' # Path to the short exposure images
 gt_dir = './dataset/Sony/long/' # Path to the long exposure images
 checkpoint_dir = './result_Sony/' # Path to the checkpoint directory
-result_dir = './result_Sony/' # Path to the result directory
+result_dir = './result_Sony/final' # Path to the result directory
 ckpt = checkpoint_dir + 'model.ckpt' # Path to the model
 
 # get test IDs
@@ -145,9 +145,7 @@ class UNet(nn.Module):
 
 # Pack the raw image into 4 channels using the bayer pattern
 def pack_raw(raw):
-    im = raw.raw_image_visible.astype(np.float32)  # Change data to float32
-    im = np.maximum(im - 512, 0) / (16383 - 512)  # subtract the black level
-
+    im = np.maximum(raw - 512, 0) / (16383 - 512)  # subtract the black level
     im = np.expand_dims(im, axis=2)  # Add a channel dimension
     img_shape = im.shape  # Get the shape of the image
     H = img_shape[0]  # Get the height of the image
@@ -161,60 +159,56 @@ def pack_raw(raw):
     return out
 
 
-# loss function using absolute difference between the output and ground truth
-def loss_function(out_image, gt_image):
-    loss = torch.mean(torch.abs(out_image - gt_image))
-    return loss
-
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # check if GPU is available
 unet = UNet() # Initialize the model
-unet.to(device) # assign the model to the GPU or CPU
-unet.train() # Set the model to training mode
 
-if not os.path.isdir(result_dir + 'final/'):
-    os.makedirs(result_dir + 'final/')
+unet.load_state_dict(torch.load(ckpt,map_location={'cuda:1':'cuda:0'}))
+model = unet.to(device)
+if not os.path.isdir(result_dir):
+    os.makedirs(result_dir)
 
-with torch.no_grad():
-    unet.eval() # Set the model to evaluation mode
-    for test_id in test_ids: # Iterate over test_ids
-        # test the first image in each sequence
-        in_files = glob.glob(input_dir + '%05d_00*.ARW' % test_id)
-        for k in range(len(in_files)):
-            in_path = in_files[k]
-            in_fn = os.path.basename(in_path)
-            print(in_fn)
+for test_id in test_ids: # Loop through all test_ids
+    in_files = glob.glob(input_dir + '%05d_00*.ARW' % test_id) # Get input image files (first image in each sequence) based on the test_id
 
-            gt_files = glob.glob(gt_dir + '%05d_00*.ARW' % test_id) # Find ground truth files matching the given pattern
-            gt_path = gt_files[0]
-            gt_fn = os.path.basename(gt_path)
+    for k in range(len(in_files)): # Iterate through all input files
+        in_path = in_files[k]
+        _, in_fn = os.path.split(in_path)
+        print(in_fn)
+        gt_files = glob.glob(gt_dir + '%05d_00*.ARW' % test_id)  # Get the ground truth files for the current test_id
 
-            in_exposure = float(in_fn[9:-5]) # Extract exposure information from the file names
-            gt_exposure = float(gt_fn[9:-5])
-            ratio = min(gt_exposure / in_exposure, 300) # Calculate the ratio of exposures
+        _, gt_fn = os.path.split(gt_files[0])
+        in_exposure = float(in_fn[9:-5]) # Extract exposure values from input
+        gt_exposure = float(gt_fn[9:-5]) # Extract exposure values from ground truth
+        ratio = min(gt_exposure / in_exposure, 300) # Calculate the exposure ratio and limit it to 300
 
-            raw = rawpy.imread(in_path) # Read and preprocess the input raw image
-            input_full = np.expand_dims(pack_raw(raw), axis=0) * ratio
+        raw = rawpy.imread(in_path) # Read the raw input image
+        im = raw.raw_image_visible.astype(np.float32) # Convert it to a visible float32 image
+        input_full = np.expand_dims(pack_raw(im), axis=0) * ratio # Multiply image with exposure ratio
 
-            im = raw.postprocess(use_camera_wb=True, half_size=False, no_auto_bright=True, output_bps=16) # Post-process the input raw image
-            scale_full = np.expand_dims(np.float32(im/65535.0),axis = 0)*ratio
+        im = raw.postprocess(use_camera_wb=True, half_size=False, no_auto_bright=True, output_bps=16)
+        scale_full = np.expand_dims(np.float32(im / 65535.0), axis=0)
 
-            gt_raw = rawpy.imread(gt_path) # Read and post-process the ground truth raw image
-            im = gt_raw.postprocess(use_camera_wb=True, half_size=False, no_auto_bright=True, output_bps=16)
-            gt_full = np.expand_dims(np.float32(im / 65535.0), axis=0)
+        gt_raw = rawpy.imread(gt_files[0])  # Read the raw ground truth image and post-process it
+        im = gt_raw.postprocess(use_camera_wb=True, half_size=False, no_auto_bright=True, output_bps=16)
+        gt_full = np.expand_dims(np.float32(im / 65535.0), axis=0)
 
-            input_full = np.minimum(input_full, 1.0) # Clamp the input_full to [0, 1] range
-            in_img = torch.from_numpy(input_full).permute(0,3,1,2).to(device) # Convert input_full to PyTorch tensor and move to device
-            out_img = unet(in_img) # Apply the model to the input image
-            output = out_img.permute(0, 2, 3, 1).cpu().data.numpy() # Convert the output tensor back to NumPy array
-            output = np.minimum(np.maximum(output, 0), 1)
+        input_full = np.minimum(input_full, 1.0) # Clip the input image to the range [0, 1]
 
-            output = output[0, :, :, :] # Remove the batch dimension
-            gt_full = gt_full[0, :, :, :]
-            scale_full = scale_full[0, :, :, :]
-            scale_full = scale_full * np.mean(gt_full) / np.mean(scale_full)  # Scale the low-light image to the same mean of the groundtruth
+        in_img = torch.from_numpy(input_full).permute(0, 3, 1, 2).to(device) # Convert the input image to a PyTorch tensor
+        out_img = unet(in_img) # Perform the image enhancement using the UNet model
 
-            Image.fromarray((output * 255).astype('uint8')).save(result_dir + '%5d_00_%d_ori.png' % (test_id, ratio)) # Save the images
-            Image.fromarray((output * 255).astype('uint8')).save(result_dir + '%5d_00_%d_out.png' % (test_id, ratio))
-            Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_scale.png' % (test_id, ratio))
-            Image.fromarray((gt_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_gt.png' % (test_id, ratio))
+        # Convert to numpy array and clip between 0 and 1
+        output = out_img.permute(0, 2, 3, 1).cpu().data.numpy()
+        output = np.minimum(np.maximum(output, 0), 1)
+
+        # Remove the batch dimension from the images
+        output = output[0, :, :, :]
+        gt_full = gt_full[0, :, :, :]
+        scale_full = scale_full[0, :, :, :]
+        scale_full = scale_full * np.mean(gt_full) / np.mean(scale_full)  # scale the low-light image to the same mean of the groundtruth
+
+        Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_ori.png' % (test_id, ratio))
+        Image.fromarray((output * 255).astype('uint8')).save(result_dir + '%5d_00_%d_out.png' % (test_id, ratio))
+        Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_scale.png' % (test_id, ratio))
+        Image.fromarray((gt_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_gt.png' % (test_id, ratio))
