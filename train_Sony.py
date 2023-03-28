@@ -20,7 +20,7 @@ train_ids = [int(os.path.basename(train_fn)[0:5]) for train_fn in train_fns]
 ps = 512  # patch size for training
 save_freq = 500
 
-DEBUG = 0
+DEBUG = 1
 if DEBUG == 1:
     save_freq = 2
     train_ids = train_ids[0:5]
