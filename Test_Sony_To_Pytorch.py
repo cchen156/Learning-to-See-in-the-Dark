@@ -206,7 +206,7 @@ for test_id in test_ids: # Loop through all test_ids
         output = output[0, :, :, :]
         gt_full = gt_full[0, :, :, :]
         scale_full = scale_full[0, :, :, :]
-        scale_full = scale_full * np.mean(gt_full) / np.mean(scale_full)  # scale the low-light image to the same mean of the groundtruth
+        scale_full = scale_full * np.mean(gt_full) / np.mean(scale_full)
 
         Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_ori.png' % (test_id, ratio))
         Image.fromarray((output * 255).astype('uint8')).save(result_dir + '%5d_00_%d_out.png' % (test_id, ratio))
