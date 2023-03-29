@@ -6,15 +6,15 @@ import glob
 from PIL import Image
 import torch
 import torch.nn as nn
-from GPUtil import showUtilization as gpu_usage
-from numba import cuda
+# from GPUtil import showUtilization as gpu_usage
+# from numba import cuda
 
 
 
 input_dir = './dataset/Sony/short/' # Path to the short exposure images
 gt_dir = './dataset/Sony/long/' # Path to the long exposure images
 checkpoint_dir = './result_Sony/' # Path to the checkpoint directory
-result_dir = './result_Sony/' # Path to the result directory
+result_dir = './result_Sony/final/' # Path to the result directory
 ckpt = checkpoint_dir + 'model.ckpt' # Path to the model
 
 # get test IDs
