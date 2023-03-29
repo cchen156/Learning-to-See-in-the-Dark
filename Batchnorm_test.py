@@ -103,7 +103,7 @@ class UNet(nn.Module):
         
         # Forward pass through the double convolutional layer leaky relu activation and maxpooling layer
         conv2 = lrelu(self.conv2(pool1))
-        conv2 = lrelu(self.b n2(self.conv2_2(conv2)))
+        conv2 = lrelu(self.bn2(self.conv2_2(conv2)))
         pool2 = self.pool2(conv2)
 
         # Forward pass through the double convolutional layer leaky relu activation and maxpooling layer
@@ -159,9 +159,7 @@ class UNet(nn.Module):
 
 # Pack the raw image into 4 channels using the bayer pattern
 def pack_raw(raw):
-    im = raw.raw_image_visible.astype(np.float32)  # Change data to float32
-    im = np.maximum(im - 512, 0) / (16383 - 512)  # subtract the black level
-
+    im = np.maximum(raw - 512, 0) / (16383 - 512)  # subtract the black level
     im = np.expand_dims(im, axis=2)  # Add a channel dimension
     img_shape = im.shape  # Get the shape of the image
     H = img_shape[0]  # Get the height of the image
@@ -173,7 +171,6 @@ def pack_raw(raw):
                           im[1:H:2, 1:W:2, :],
                           im[1:H:2, 0:W:2, :]), axis=2)
     return out
-
 
 # loss function using absolute difference between the output and ground truth
 def loss_function(out_image, gt_image):
