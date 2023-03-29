@@ -160,7 +160,8 @@ def pack_raw(raw):
 
 
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # check if GPU is available
+# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # check if GPU is available
+device = torch.device("cpu")
 unet = UNet() # Initialize the model
 
 unet.load_state_dict(torch.load(ckpt,map_location={'cuda:1':'cuda:0'}))
