@@ -29,8 +29,8 @@ if DEBUG == 1:
 
 # Leaky relu function with slope 0.2
 def lrelu(x):
-        outt = torch.max(0.2*x, x)
-        return outt
+    outt = torch.max(0.2*x, x)
+    return outt
 
 # Unet class
 class UNet(nn.Module):
