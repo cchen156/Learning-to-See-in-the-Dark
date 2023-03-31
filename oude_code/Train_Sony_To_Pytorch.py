@@ -193,7 +193,7 @@ learning_rate = 1e-4 # Set the learning rate
 G_opt = torch.optim.Adam(unet.parameters(), lr=learning_rate) # Set the optimizer
 
 # Training loop
-for epoch in range(lastepoch, 41):
+for epoch in range(lastepoch, 30):
     # Check if the folder exists and skip the epoch if it does
     if os.path.isdir(result_dir + '%04d' % epoch):
         continue
@@ -289,5 +289,3 @@ for epoch in range(lastepoch, 41):
 
     # Save the model
     torch.save(unet.state_dict(), checkpoint_dir + 'model.ckpt')
-
-print("\nFinished training!\n")
