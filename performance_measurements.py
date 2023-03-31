@@ -31,7 +31,7 @@ print('mean ssim: ', mean_ssim)
 
 ###  CHANGE THESE PARAMETERS TO CHANGE THE NAME OF THE CSV FILE AND THE MODEL NAME IN THE CSV FILE  ###
 results_file = 'results_40.csv'
-model_name = 'Single Batch Normalization'
+model_name = 'Without Normalization'
 
 
 # Check if the csv file exists, if it does, append the results to the file, if not, create a new file and write the results to it
