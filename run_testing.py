@@ -1,6 +1,6 @@
 from unet import UNet_original, UNet_single_batchnorm, UNet_double_batchnorm
-from Train_Sony import train_sony
-from Test_Sony import test_sony
+from train_Sony import train_sony
+from test_Sony import test_sony
 from calculate_metrics import calculate_metrics
 
 if __name__ == '__main__':
@@ -19,7 +19,14 @@ if __name__ == '__main__':
     unet_models = {"Without Batch Normalization": UNet_original(),
                    "With Single Batch Normalization": UNet_single_batchnorm(),
                    "With Double Batch Normalization": UNet_double_batchnorm()}
-    for model_name, model in unet_models.items():
+    unet_models = [["Without_Batch_Norm", UNet_original(), "Without Batch Normalization"],
+                   ["Single_Batch_Norm", UNet_single_batchnorm(), "With Single Batch Normalization"],
+                   ["Double_Batch_Norm", UNet_double_batchnorm(), "With Double Batch Normalization"]]
+    for folder_name, model, model_name in unet_models:
         train_sony(model, n_epochs=n_epochs, DEBUG=DEBUG, TRAIN_FROM_SCRATCH=True, device=train_device)
-        test_sony(model, DEBUG=True, device=test_device)
+
+        # name of folder to store results
+        result_folder = folder_name + '_' + str(n_epochs) + '_epochs'
+        test_sony(model, result_folder, DEBUG=True, device=test_device)
+        
         calculate_metrics(results_file=results_file, model_name=model_name)

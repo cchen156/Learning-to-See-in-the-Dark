@@ -30,14 +30,15 @@ def loss_function(out_image, gt_image):
     return loss
 
 
-def test_sony(unet, DEBUG=True, device='cuda:0'):
+def test_sony(unet, result_folder, DEBUG=True, device='cuda:0'):
     """Function to train the model"""
 
     # Required paths to the datasets
     input_dir = './dataset/Sony/short/' # Path to the short exposure images
     gt_dir = './dataset/Sony/long/' # Path to the long exposure images
     checkpoint_dir = './result_Sony/' # Path to the checkpoint directory
-    result_dir = './result_Sony/final/' # Path to the result directory
+    # result_dir = './result_Sony/final/' # Path to the result directory
+    result_dir = './results/' + result_folder + '/' # Path to the result directory
     ckpt = checkpoint_dir + 'model.ckpt' # Path to the model
 
     # get test IDs
@@ -96,9 +97,9 @@ def test_sony(unet, DEBUG=True, device='cuda:0'):
             scale_full = scale_full[0, :, :, :]
             scale_full = scale_full * np.mean(gt_full) / np.mean(scale_full)
 
-            Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_ori.png' % (test_id, ratio))
+            # Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_ori.png' % (test_id, ratio))
             Image.fromarray((output * 255).astype('uint8')).save(result_dir + '%5d_00_%d_out.png' % (test_id, ratio))
-            Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_scale.png' % (test_id, ratio))
+            # Image.fromarray((scale_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_scale.png' % (test_id, ratio))
             Image.fromarray((gt_full * 255).astype('uint8')).save(result_dir + '%5d_00_%d_gt.png' % (test_id, ratio))
 
     print("\nFinished testing!\n")
