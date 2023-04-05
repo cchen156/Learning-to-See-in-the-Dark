@@ -1,0 +1,4 @@
+Model,Mean psnr,Mean ssim
+Double Batch Normalization,70.08534131917101,0.9992578581279
+Single Batch Normalization,69.09286454298345,0.9990374195471773
+Without Normalization,66.32649029769772,0.9977063206417741
