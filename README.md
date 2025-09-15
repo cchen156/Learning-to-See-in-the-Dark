@@ -22,9 +22,11 @@ Tested in Ubuntu + Intel i7 CPU + Nvidia Titan X (Pascal) with Cuda (>=8.0) and 
 
 ### Dataset
 
+**Update Sep, 2025:** We got signicant bills from Google storage. Please download the data manually and save a copy locally. Avoid re-downloading the data per experiment run. The download script is removed. Thank you!  
+
 **Update Aug, 2018:** We found some misalignment with the ground-truth for image 10034, 10045, 10172. Please remove those images for quantitative results, but they still can be used for qualitative evaluations.
 
-You can download it directly from Google drive for the [Sony](https://storage.googleapis.com/isl-datasets/SID/Sony.zip) (25 GB)  and [Fuji](https://storage.googleapis.com/isl-datasets/SID/Fuji.zip) (52 GB) sets. 
+You can download it directly from Google drive for the [Sony](https://storage.googleapis.com/isl-datasets/SID/Sony2025.zip) (25 GB)  and [Fuji](https://storage.googleapis.com/isl-datasets/SID/Fuji2025.zip) (52 GB) sets. 
 
 There is download limit by Google drive in a fixed period of time. If you cannot download because of this, try these links: [Sony](https://drive.google.com/open?id=1G6VruemZtpOyHjOC5N8Ww3ftVXOydSXx) (25 GB)  and [Fuji](https://drive.google.com/open?id=1C7GeZ3Y23k1B8reRL79SqnZbRBc4uizH) (52 GB).
 
